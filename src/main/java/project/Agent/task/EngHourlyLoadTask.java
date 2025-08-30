@@ -13,7 +13,7 @@ public class EngHourlyLoadTask implements Runnable, TaskInterface{
     public void run() {
         Long sleepCount = Long.parseLong(cornJob.getName().split("-")[1]);
         try {
-            System.out.println("START : EngHourlyLoadTask running "+sleepCount+cornJob.getName());
+            System.out.println("START : EngHourlyLoadTask running "+cornJob.getName());
             Thread.sleep(sleepCount);
             System.out.println("END : EngHourlyLoadTask running "+cornJob.getName());
         } catch (InterruptedException e) {

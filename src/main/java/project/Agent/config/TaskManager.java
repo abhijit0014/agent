@@ -4,7 +4,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import project.Agent.dto.CornJob;
 import project.Agent.dto.JobEntry;
-import project.Agent.service.CornJobService;
+import project.Agent.service.CronJobService;
 import project.Agent.task.TaskInterface;
 
 import java.util.List;
@@ -19,11 +19,11 @@ public class TaskManager {
     private int poolSize = 3;
     private LinkedBlockingQueue<TaskInterface> taskQueue;
     private ExecutorService executor;
-    private CornJobService cornJobService;
+    private CronJobService cronJobService;
     private JobList jobList;
 
-    public TaskManager(CornJobService cornJobService, JobList jobList) {
-        this.cornJobService = cornJobService;
+    public TaskManager(CronJobService cronJobService, JobList jobList) {
+        this.cronJobService = cronJobService;
         this.jobList = jobList;
         //this.poolSize = Runtime.getRuntime().availableProcessors();
         this.executor = Executors.newFixedThreadPool(poolSize);
@@ -49,7 +49,7 @@ public class TaskManager {
             System.out.println("Available task slot "+ freeSlot);
 
             if (freeSlot >0){
-                List<CornJob> newjobs = cornJobService.getNewJobApi(jobEntry, freeSlot);
+                List<CornJob> newjobs = cronJobService.getNewJobApi(jobEntry, freeSlot);
                 for (CornJob cornJob : newjobs){
                     System.out.println("Submitted "+jobEntry.getName()+" "+cornJob.getName());
                     taskQueue.add(jobEntry.createNewTask(cornJob));

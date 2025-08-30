@@ -6,7 +6,7 @@ import project.Agent.dto.JobEntry;
 import java.util.List;
 
 @Service
-public class CornJobService {
+public class CronJobService {
 
     public synchronized List<CornJob> getNewJobApi(JobEntry jobEntry, int limit) {
         return List.of(new CornJob(),new CornJob(),new CornJob(),new CornJob())
